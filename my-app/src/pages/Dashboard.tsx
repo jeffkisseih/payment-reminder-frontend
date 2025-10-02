@@ -16,6 +16,8 @@ export default function Dashboard() {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
 const handleSuccess = () => {
   setRefreshTrigger((prev) => prev + 1); // ✅ re-fetch summary and reminders
 };
@@ -28,7 +30,7 @@ const handleSuccess = () => {
 
     const fetchReminders = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/reminders", {
+        const res = await fetch(`${API_URL}/api/reminders`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch reminders");
