@@ -5,6 +5,7 @@ export default function MakePaymentForm({ onSuccess }: { onSuccess: () => void }
   const [reminders, setReminders] = useState<any[]>([]);
   const [reminderId, setReminderId] = useState("");
   const [amount, setAmount] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const [message, setMessage] = useState("");
   const { token } = useAuth();
 
@@ -38,7 +39,7 @@ export default function MakePaymentForm({ onSuccess }: { onSuccess: () => void }
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ reminderId, amount }),
+        body: JSON.stringify({ reminderId, amount, dueDate }),
       });
 
       if (res.ok) {
