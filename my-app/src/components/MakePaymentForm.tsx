@@ -5,7 +5,6 @@ export default function MakePaymentForm({ onSuccess }: { onSuccess: () => void }
   const [reminders, setReminders] = useState<any[]>([]);
   const [reminderId, setReminderId] = useState("");
   const [amount, setAmount] = useState("");
-  const [dueDate, setDueDate] = useState("");
   const [message, setMessage] = useState("");
   const { token } = useAuth();
 
@@ -30,16 +29,16 @@ export default function MakePaymentForm({ onSuccess }: { onSuccess: () => void }
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("➡️ Sending payment:", { reminderId, amount });
+    console.log("➡️ Sending payment:", { reminderId, amount});
 
     try {
-      const res = await fetch("http://localhost:5000/api/payments", {
+      const res = await fetch(`${API_URL}/api/payments`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ reminderId, amount, dueDate }),
+        body: JSON.stringify({ reminderId, amount}),
       });
 
       if (res.ok) {
